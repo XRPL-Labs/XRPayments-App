@@ -1,0 +1,17 @@
+diff --git a/node_modules/react-native-navigation/lib/ios/Constants.m b/node_modules/react-native-navigation/lib/ios/Constants.m
+index 2b64293..280ba34 100644
+--- a/node_modules/react-native-navigation/lib/ios/Constants.m
++++ b/node_modules/react-native-navigation/lib/ios/Constants.m
+@@ -15,7 +15,11 @@ + (CGFloat)statusBarHeight {
+ }
+ 
+ + (CGFloat)bottomTabsHeight {
+-	return CGRectGetHeight(((UITabBarController *)((UIWindow *)(UIApplication.sharedApplication.windows[0])).rootViewController).tabBar.frame);
++	@try {
++		return CGRectGetHeight(((UITabBarController *)((UIWindow *)(UIApplication.sharedApplication.windows[0])).rootViewController).tabBar.frame);
++	} @catch (NSException *exception) {
++		return 0;
++	}
+ }
+ 
+ @end

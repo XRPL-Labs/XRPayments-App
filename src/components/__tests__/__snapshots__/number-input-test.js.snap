@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#FFF",
+        "borderColor": "#c6c6c6",
+        "borderRadius": 70035,
+        "borderWidth": 1,
+        "color": "#5a5a5a",
+        "height": 133.4,
+        "justifyContent": "center",
+        "textAlign": "center",
+        "width": 375,
+      },
+    ]
+  }
+>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "height": 40,
+        "justifyContent": "center",
+        "opacity": 1,
+        "paddingLeft": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#333",
+            "fontSize": 15,
+            "fontWeight": "700",
+            "left": 18.75,
+            "position": "absolute",
+            "textAlign": "center",
+          },
+          Object {},
+        ]
+      }
+    />
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#333",
+            "fontSize": 18.75,
+            "position": "absolute",
+            "right": 25,
+            "textAlign": "center",
+          },
+        ]
+      }
+    />
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "height": 40,
+          "opacity": 0,
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#3E77E6",
+            "fontSize": 26.25,
+            "fontWeight": "300",
+          }
+        }
+      >
+        |
+      </Text>
+    </View>
+  </View>
+</View>
+`;

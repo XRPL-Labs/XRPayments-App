@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:XRPayments/Base.lproj/Launch Screen.storyboard">
+   </FileRef>
+   <FileRef
+      location = "group:XRPayments">
+   </FileRef>
+   <FileRef
+      location = "group:XRPayments-tvOS">
+   </FileRef>
+   <FileRef
+      location = "group:XRPayments-tvOSTests">
+   </FileRef>
+   <FileRef
+      location = "group:XRPayments.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:XRPaymentsTests">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
+   </FileRef>
+</Workspace>
