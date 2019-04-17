@@ -1,6 +1,6 @@
 #!/usr/bin/env bash -e
 
-PROJECT_DIR="ios/XRPTipBot"
+PROJECT_DIR="ios/XRPayments"
 INFOPLIST_FILE="Info.plist"
 INFOPLIST_DIR="${PROJECT_DIR}/${INFOPLIST_FILE}"
 

@@ -179,7 +179,12 @@ class ReceiveView extends Component {
                         }}
                     >
                         <Text
-                            style={{ fontSize: ScaleFont(25), fontWeight: "600", color: "grey", textAlign: "center" }}
+                            style={{
+                                fontSize: ScaleFont(25),
+                                fontWeight: "600",
+                                color: "grey",
+                                textAlign: "center",
+                            }}
                         >
                             {appState.currency} {Format(amounts[appState.currency])}
                         </Text>
@@ -279,6 +284,7 @@ class ReceiveView extends Component {
                             fontWeight: "600",
                             color: "black",
                             textAlign: "center",
+                            paddingTop: 8,
                             flex: 1,
                         }}
                     >
@@ -361,7 +367,7 @@ class ReceiveView extends Component {
     };
 
     render() {
-        const { fetchingRate, amounts, paid, topBarHeight, statusBarHeight } = this.state;
+        const { fetchingRate, amounts, paid, topBarHeight } = this.state;
 
         if (fetchingRate || !topBarHeight) {
             return (
