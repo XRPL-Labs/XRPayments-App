@@ -132,7 +132,7 @@ class ReceiveView extends Component {
         paidList.push({ name, amount });
 
         this.setState({
-            paid: paid + amount,
+            paid: Math.round((parseFloat(paid) + parseFloat(amount)) * 1000000) / 1000000,
             paidList,
         });
     };
@@ -169,13 +169,9 @@ class ReceiveView extends Component {
 
                     <View
                         style={{
-                            position: "absolute",
-                            left: 0,
-                            top: "45%",
-                            width: "100%",
-                            flexDirection: "row",
-                            justifyContent: "center",
+                            flex: 1,
                             alignItems: "center",
+                            justifyContent: "center",
                         }}
                     >
                         <Text
@@ -186,13 +182,13 @@ class ReceiveView extends Component {
                                 textAlign: "center",
                             }}
                         >
-                            {appState.currency} {Format(amounts[appState.currency])}
+                            {Format(amounts[appState.currency])} {appState.currency}
                         </Text>
 
                         <Image
-                            style={{ marginLeft: 20, marginRight: 20, width: AppSizes.screen.width * 0.08 }}
+                            style={{ marginTop: 30, marginBottom: 30, width: AppSizes.screen.width * 0.08 }}
                             resizeMode={"contain"}
-                            source={require("../../assets/images/right-arrow.png")}
+                            source={require("../../assets/images/arrow-down.png")}
                         />
                         <Animated.Text
                             style={{
@@ -235,7 +231,10 @@ class ReceiveView extends Component {
                         Remaining
                         <Text style={{ fontSize: ScaleFont(28), fontWeight: "600", color: "#CA0000" }}>
                             {" "}
-                            {amounts["XRP"] - paid}{" "}
+                            {(amounts["XRP"] - paid)
+                                .toFixed(6)
+                                .replace(/[0]+$/g, "")
+                                .replace(/\.$/, "")}{" "}
                         </Text>
                         XRP
                     </Text>
@@ -373,6 +372,7 @@ class ReceiveView extends Component {
             return (
                 <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
                     <ActivityIndicator size="large" color="#0000ff" />
+                    <Text style={{ marginTop: 20 }}>Converting the amount...</Text>
                 </View>
             );
         }
