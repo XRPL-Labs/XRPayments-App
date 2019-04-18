@@ -65,6 +65,12 @@ class NumericPad extends PureComponent {
         if (valueArr == "" || valueArr == undefined || valueArr == null) {
             return;
         }
+
+        let valueStr = valueArr.join("");
+        if (valueStr.split(".").length > 2) {
+            valueStr = valueStr.replace(/\.+$/, "");
+        }
+        valueArr = valueStr.split("");
         this.setState({
             valueArr: valueArr,
         });
