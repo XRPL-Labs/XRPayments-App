@@ -6,7 +6,7 @@ import React, { Component } from "react";
 
 import { Navigation } from "react-native-navigation";
 
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View, Text, StyleSheet, Alert, Platform, Dimensions, PixelRatio } from "react-native";
 
 import { NumericPad, NumericInput } from "@components";
 
@@ -29,6 +29,17 @@ class MainView extends Component {
         Navigation.events().bindComponent(this);
     }
 
+    componentDidMount() {
+        this.updateTitle();
+        this.checkDeviceType();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.appState.name !== prevProps.appState.name) {
+            this.updateTitle();
+        }
+    }
+
     navigationButtonPressed({ buttonId }) {
         const { reset_settings } = this.props;
         if (buttonId === "buttonSignout") {
@@ -49,7 +60,7 @@ class MainView extends Component {
         }
     }
 
-    componentDidMount() {
+    updateTitle = () => {
         const { appState, componentId } = this.props;
         Navigation.mergeOptions(componentId, {
             topBar: {
@@ -64,26 +75,40 @@ class MainView extends Component {
                 },
             },
         });
-    }
+    };
 
-    componentDidUpdate(prevProps) {
-        const { appState, componentId } = this.props;
-        if (this.props.appState.name !== prevProps.appState.name) {
-            Navigation.mergeOptions(componentId, {
-                topBar: {
-                    title: {
-                        component: {
-                            name: "app.NavBarScreen",
-                            alignment: "center",
-                            passProps: {
-                                title: appState.name,
-                            },
-                        },
-                    },
-                },
-            });
+    checkDeviceType = () => {
+        const { save_settings, appState } = this.props;
+
+        let isTablet = false;
+
+        const { height, width } = Dimensions.get("window");
+        const pixelDensity = PixelRatio.get();
+        const adjustedWidth = width * pixelDensity;
+        const adjustedHeight = height * pixelDensity;
+        if (pixelDensity < 2 && (adjustedWidth >= 1000 || adjustedHeight >= 1000)) {
+            isTablet = true;
+        } else if (pixelDensity === 2 && (adjustedWidth >= 1920 || adjustedHeight >= 1920)) {
+            isTablet = true;
+        } else {
+            isTablet = false;
         }
-    }
+
+        if (!isTablet && appState.showAlert) {
+            Alert.alert("Notice", "For better experience we highly suggest to use Tablets/Ipad for using this app!", [
+                {
+                    text: "Ok",
+                    onPress: () => {},
+                    style: "default",
+                },
+                {
+                    text: "Don't remind me",
+                    onPress: () => save_settings({ showAlert: false }),
+                    style: "destructive",
+                },
+            ]);
+        }
+    };
 
     showReceiveScreen = () => {
         const { amount } = this.state;
@@ -91,10 +116,7 @@ class MainView extends Component {
         if (!amount || !parseFloat(amount)) {
             return;
         }
-
-        this.setState({
-            amount: "",
-        });
+        this.setState({ amount: "" });
 
         Navigation.push(this.props.componentId, {
             component: {
