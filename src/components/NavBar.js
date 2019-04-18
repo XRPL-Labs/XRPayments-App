@@ -1,14 +1,40 @@
 import React, { PureComponent } from "react";
-import { StyleSheet, Platform, View, Image, Text } from "react-native";
+import { StyleSheet, Platform, View, Image, Text, Alert } from "react-native";
+
+import { Navigation } from "react-native-navigation";
 
 import { AppSizes } from "@theme";
 
 import { ScaleFont } from "@libs/utils";
 
 export default class NavBar extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            topBarHeight: props.topBarHeight || null,
+        };
+    }
+
+    componentDidMount() {
+        const { topBarHeight } = this.state;
+        if (!topBarHeight) {
+            Navigation.constants().then(constants => {
+                this.setState({
+                    topBarHeight: constants.topBarHeight,
+                });
+            });
+        }
+    }
+
     render() {
+        const { topBarHeight } = this.state;
+
+        if (!topBarHeight) {
+            return null;
+        }
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, { height: topBarHeight }]}>
                 <Image style={[styles.logo]} resizeMode={"contain"} source={require("../assets/images/logo.png")} />
                 <Text style={styles.title}>{this.props.title}</Text>
             </View>
@@ -20,7 +46,6 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         alignItems: "center",
-        marginLeft: Platform.OS === "android" ? 20 : 0,
         width: AppSizes.screen.width * 0.95,
         backgroundColor: "transparent",
     },
@@ -30,6 +55,7 @@ const styles = StyleSheet.create({
     },
     title: {
         position: "absolute",
+        textAlign: "center",
         left: 0,
         color: "#000",
         fontSize: ScaleFont(14),

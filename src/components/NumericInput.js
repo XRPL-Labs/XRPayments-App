@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     },
     currency: {
         position: "absolute",
-        tintColor: "#000",
+        tintColor: "#21B466",
         right: AppSizes.screen.width * 0.02,
         width: AppSizes.screen.width * 0.031,
         height: AppSizes.screen.width * 0.031,

@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+    save_settings: appActions.save_settings,
     reset_settings: appActions.reset_settings,
 };
 

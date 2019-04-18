@@ -7,6 +7,7 @@ const initialState = {
     name: "",
     xrpl: "",
     tipbot: "",
+    showAlert: true,
 };
 
 // Reducer

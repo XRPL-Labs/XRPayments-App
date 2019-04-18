@@ -1,14 +1,15 @@
 // @flow
-import { Provider } from "react-redux";
 
+// navigation
 import { Navigation } from "react-native-navigation";
-
 import registerScreens from "@screens";
 
+// constantst
 import { AppScreens } from "@constants";
+import { Px2Dp } from "@libs/utils";
 
-import { ScaleFont } from "@libs/utils";
-
+// redux
+import { Provider } from "react-redux";
 import store from "@redux/store/";
 
 console.disableYellowBox = true;
@@ -42,10 +43,10 @@ export default class App {
         //Do something with state
         //i.e. determine if the user has activated
 
-        if (state.app.channel) {
+        if (state.app.channel && this.root !== "default") {
             this.root = "default";
             this.startDefaultApp();
-        } else if (this.root !== "activate") {
+        } else if (!state.app.channel && this.root !== "activate") {
             this.root = "activate";
             this.startActivation();
         }
@@ -56,7 +57,6 @@ export default class App {
         Navigation.setRoot({
             root: {
                 stack: {
-                    id: "rootStack",
                     children: [
                         {
                             component: {
@@ -66,10 +66,11 @@ export default class App {
                                         title: {
                                             component: {
                                                 name: "app.NavBarScreen",
-                                                passProps: {
-                                                    title: "XRP Community Meetup (Register 1)",
-                                                },
                                                 alignment: "center",
+                                            },
+                                            alignment: "center",
+                                            largeTitle: {
+                                                visible: true,
                                             },
                                         },
                                         rightButtons: {
