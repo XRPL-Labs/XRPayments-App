@@ -26,7 +26,7 @@ import AppAPI from "@libs/api";
 
 import { AppSizes, AppFonts } from "@theme";
 
-import { Truncate, ScaleFont, Format } from "@libs/utils";
+import { Truncate, ScaleFont, Format, Px2Dp } from "@libs/utils";
 
 import LinearGradient from "react-native-linear-gradient";
 
@@ -45,12 +45,11 @@ class ReceiveView extends Component {
             fetchingRate: true,
             paid: 0,
             paidList: [],
-            topBarHeight: null,
             fadeAnim: new Animated.Value(0),
         };
     }
+
     componentDidMount() {
-        this.getTopBarHeight();
         this.convertAmount();
         this.subscribe();
         this.fadeAnimation();
@@ -100,15 +99,6 @@ class ReceiveView extends Component {
                 });
             })
             .catch(err => console.log(err));
-    };
-
-    getTopBarHeight = () => {
-        Navigation.constants().then(constants => {
-            this.setState({
-                topBarHeight: constants.topBarHeight,
-                statusBarHeight: constants.statusBarHeight,
-            });
-        });
     };
 
     subscribe = () => {
@@ -163,7 +153,7 @@ class ReceiveView extends Component {
                                 textAlign: "center",
                             }}
                         >
-                            Waiting for payment...
+                            Waiting for payment ...
                         </Text>
                     </View>
 
@@ -176,17 +166,23 @@ class ReceiveView extends Component {
                     >
                         <Text
                             style={{
-                                fontSize: ScaleFont(25),
+                                fontSize: ScaleFont(60),
                                 fontWeight: "600",
                                 color: "grey",
                                 textAlign: "center",
                             }}
                         >
-                            {Format(amounts[appState.currency])} {appState.currency}
+                            {Format(amounts[appState.currency])}{" "}
+                            <Text style={{ fontSize: ScaleFont(25) }}>{appState.currency}</Text>
                         </Text>
 
                         <Image
-                            style={{ marginTop: 30, marginBottom: 30, width: AppSizes.screen.width * 0.08 }}
+                            style={{
+                                marginTop: Px2Dp(20),
+                                marginBottom: Px2Dp(20),
+                                width: Px2Dp(40),
+                                height: Px2Dp(40),
+                            }}
                             resizeMode={"contain"}
                             source={require("../../assets/images/arrow-down.png")}
                         />
@@ -210,7 +206,7 @@ class ReceiveView extends Component {
             return (
                 <View style={{ flex: 1, alignItems: "flex-start", justifyContent: "center" }}>
                     <Text style={{ fontSize: ScaleFont(40), marginBottom: 20, fontWeight: "600", color: "green" }}>
-                        Recieved
+                        Received
                         <Text style={{ fontSize: ScaleFont(42), fontWeight: "600", color: "green" }}> {paid} </Text>
                         XRP
                     </Text>
@@ -334,7 +330,7 @@ class ReceiveView extends Component {
                 </View>
                 <View style={{ flex: 2, justifyContent: "center", alignItems: "center" }}>
                     <Text style={{ fontSize: AppFonts.h4.size, fontWeight: "600", color: "green" }}>
-                        Payment recieved ({paid} XRP)
+                        Payment Recieved ({paid} XRP)
                     </Text>
                     {paid > amounts["XRP"] && (
                         <Text
@@ -366,9 +362,9 @@ class ReceiveView extends Component {
     };
 
     render() {
-        const { fetchingRate, amounts, paid, topBarHeight } = this.state;
+        const { fetchingRate, amounts, paid } = this.state;
 
-        if (fetchingRate || !topBarHeight) {
+        if (fetchingRate) {
             return (
                 <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
                     <ActivityIndicator size="large" color="#0000ff" />
