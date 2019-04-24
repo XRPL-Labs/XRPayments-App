@@ -67,7 +67,7 @@ class MainView extends Component {
                 title: {
                     component: {
                         name: "app.NavBarScreen",
-                        alignment: "center",
+                        alignment: "left",
                         passProps: {
                             title: appState.name,
                         },
@@ -95,18 +95,22 @@ class MainView extends Component {
         }
 
         if (!isTablet && appState.showAlert) {
-            Alert.alert("Notice", "For better experience we highly suggest to use Tablets/Ipad for using this app!", [
-                {
-                    text: "Ok",
-                    onPress: () => {},
-                    style: "default",
-                },
-                {
-                    text: "Don't remind me",
-                    onPress: () => save_settings({ showAlert: false }),
-                    style: "destructive",
-                },
-            ]);
+            Alert.alert(
+                "Notice",
+                "For a better user experience we recommend to use tablets (eg. iPad) for using this app.",
+                [
+                    {
+                        text: "Ok",
+                        onPress: () => {},
+                        style: "default",
+                    },
+                    {
+                        text: "Don't remind me",
+                        onPress: () => save_settings({ showAlert: false }),
+                        style: "destructive",
+                    },
+                ],
+            );
         }
     };
 
