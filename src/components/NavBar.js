@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         width: AppSizes.screen.width * 0.15,
-        marginLeft: AppSizes.screen.width * 0.4,
+        marginLeft: AppSizes.screen.width * 0.405,
     },
     title: {
         position: "absolute",
