@@ -6,7 +6,6 @@ import registerScreens from "@screens";
 
 // constantst
 import { AppScreens } from "@constants";
-import { Px2Dp } from "@libs/utils";
 
 // redux
 import { Provider } from "react-redux";
@@ -63,16 +62,6 @@ export default class App {
                                 name: AppScreens.MAIN_SCREEN,
                                 options: {
                                     topBar: {
-                                        title: {
-                                            component: {
-                                                name: "app.NavBarScreen",
-                                                alignment: "center",
-                                            },
-                                            alignment: "center",
-                                            largeTitle: {
-                                                visible: true,
-                                            },
-                                        },
                                         rightButtons: {
                                             id: "buttonSignout",
                                             icon: require("./assets/images/signout.png"),

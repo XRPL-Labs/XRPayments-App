@@ -20,11 +20,10 @@ import {
     Image,
 } from "react-native";
 
-import { Spacer } from "@components";
-
 import { AppSizes } from "@theme";
 
 import { ScaleFont, Px2Dp } from "@libs/utils";
+
 /* Component ==================================================================== */
 class ActivateView extends Component {
     constructor(props) {
@@ -65,7 +64,7 @@ class ActivateView extends Component {
                 Alert.alert(
                     "Invalid",
                     "Please enter a valid XRPayments Channel ID.",
-                    [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+                    [{ text: "OK", onPress: () => {} }],
                     { cancelable: false },
                 );
             });

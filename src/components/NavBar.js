@@ -46,12 +46,11 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
         alignItems: "center",
-        width: AppSizes.screen.width * 0.95,
         backgroundColor: "transparent",
     },
     logo: {
         width: AppSizes.screen.width * 0.15,
-        marginLeft: AppSizes.screen.width * 0.025,
+        marginLeft: AppSizes.screen.width * 0.4,
     },
     title: {
         position: "absolute",
