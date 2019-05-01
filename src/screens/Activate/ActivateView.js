@@ -30,7 +30,7 @@ class ActivateView extends Component {
         super(props);
 
         this.state = {
-            channek_id: "",
+            channel_id: "",
             isChecking: false,
             error: false,
         };
@@ -38,9 +38,9 @@ class ActivateView extends Component {
 
     checkChannelId = () => {
         const { get_settings } = this.props;
-        const { channek_id } = this.state;
+        const { channel_id } = this.state;
 
-        if (!channek_id) {
+        if (!channel_id) {
             return;
         }
 
@@ -49,7 +49,7 @@ class ActivateView extends Component {
             error: false,
         });
 
-        get_settings(channek_id)
+        get_settings(channel_id)
             .then(() => {
                 this.setState({
                     isChecking: false,
@@ -114,7 +114,7 @@ class ActivateView extends Component {
                                     borderColor: error ? "red" : "#c6c6c6",
                                 },
                             ]}
-                            onChangeText={channek_id => this.setState({ channek_id })}
+                            onChangeText={channel_id => this.setState({ channel_id })}
                         />
                     </View>
                     <View style={{ flex: 1 }}>
